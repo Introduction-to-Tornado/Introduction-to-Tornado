@@ -1,0 +1,7 @@
+body {
+	font-family: Helvetica,Arial,sans-serif;
+	width: 600px;
+	margin: 0 auto;
+}
+
+.replaced:hover { color: #00f; }

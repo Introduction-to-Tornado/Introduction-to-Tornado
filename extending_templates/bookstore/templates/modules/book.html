@@ -1,0 +1,13 @@
+<div class="book">
+  <h3 class="book_title">{{ book["title"] }}</h3>
+  {% if book["subtitle"] != "" %}
+		<h4 class="book_subtitle">{{ book["subtitle"] }}</h4>
+	{% end %}
+  <img src="{{ book["image"] }}" class="book_image"/>
+	<div class="book_details">
+	  <div class="book_date_released">Released: {{ book["date_released"]}}</div>
+	  <div class="book_date_added">Added: {{ locale.format_date(book["date_added"], relative=False) }}</div>
+	  <h5>Description:</h5>
+		<div class="book_body">{% raw book["description"] %}</div>
+	</div>
+</div>

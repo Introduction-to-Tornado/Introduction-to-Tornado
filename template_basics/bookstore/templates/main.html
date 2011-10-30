@@ -1,0 +1,20 @@
+<html>	 
+<head>
+	<title>{{ escape(page_title) }}</title>
+</head>
+<body>
+	<div id="container">
+		<header>
+			{% block head %}<h1>Hello.</h1>{% end %}
+		</header>
+		<div id="main">
+			<div id="content">
+				{% block body %}{% end %}
+			</div>
+		</div>
+		<footer>
+			{% block footer %}{% end %}
+		</footer>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ static_url("style.css") }}">
+		<title>The Alpha Munger</title>
+	</head>
+	<body>
+		<h1>Your text</h1>
+		<p>
+{% for line in change_lines %}
+	{% for word in line.split(' ') %}
+		{% if len(word) > 0 and word[0] in source_map %}
+			<span class="replaced"
+					title="{{word}}">{{ choice(source_map[word[0]]) }}</span>
+		{% else %}
+			<span class="unchanged" title="unchanged">{{word}}</span>
+		{% end %}
+	{% end %}
+			<br>
+{% end %}
+		</p>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ static_url("style.css") }}">
+		<title>The Alpha Munger</title>
+	</head>
+	<body>
+		<h1>The Alpha Munger</h1>
+		<p>Enter two texts below. The replacement text will have its words
+			replaced by words beginning with the same letter in the source text.</p>
+		<form method="post" action="/poem">
+		<p>Source text<br>
+			<textarea rows=4 cols=55 name="source"></textarea></p>
+		<p>Text for replacement<br>
+			<textarea rows=4 cols=55 name="change"></textarea></p>
+		<input type="submit">
+		</form>
+	</body>
+</html>

@@ -1,7 +1,7 @@
 # [Introduction to Tornado](http://shop.oreilly.com/product/0636920021292.do)
 _by Michael Dory, Adam Parrish, and Brendan Berg_
 
-![http://shop.oreilly.com/product/0636920021292.do](http://akamaicovers.oreilly.com/images/0636920021292/cat.gif "Book cover")
+[![Book cover](http://akamaicovers.oreilly.com/images/0636920021292/cat.gif "Book cover")](http://shop.oreilly.com/product/0636920021292.do)
 
 ## Sample code for the book
 

@@ -5,7 +5,9 @@
 {% end %}
 
 {% block body %}
-	<p>Hello from the child template!</p>
+	{% for sample in samples %}
+	  	{{ modules.Sample(sample) }}
+	{% end %}
 {% end %}
 
 {% block footer %}

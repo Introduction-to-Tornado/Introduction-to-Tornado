@@ -30,14 +30,25 @@ class MainHandler(tornado.web.RequestHandler):
 			"index.html",
 			header_text = "Header goes here",
 			footer_text = "Footer goes here"
+			samples=[
+				{
+					"title":"Item 1",
+				},
+				{
+					"title":"Item 2",
+				},
+				{
+					"title":"Item 3",
+				}
+			]	
 		)
 
 
 class SampleModule(tornado.web.UIModule):
 	def render(self, book):
 		return self.render_string(
-			"modules/book.html", 
-			book=book,
+			"modules/sample.html", 
+			sample=sample,
 		)
 
 	def html_body(self):

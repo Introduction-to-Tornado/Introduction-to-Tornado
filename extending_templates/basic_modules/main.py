@@ -29,8 +29,6 @@ class MainHandler(tornado.web.RequestHandler):
 	def get(self):
 		self.render(
 			"index.html",
-			header_text = "Header goes here",
-			footer_text = "Footer goes here",
 			samples=[
 				{
 					"title":"Item 1",
@@ -56,10 +54,10 @@ class SampleModule(tornado.web.UIModule):
 		)
 
 	def html_body(self):
-		return "<div class=\"addition\"><p>Hello!</p></div>"
+		return "<div class=\"addition\"><p>html_body()</p></div>"
 	
 	def embedded_javascript(self):
-		return "document.write(\"hi again!\")"
+		return "document.write(\"<p>embedded_javascript()</p>\")"
 	
 	def embedded_css(self):
 		return ".addition {color: #A1CAF1}"

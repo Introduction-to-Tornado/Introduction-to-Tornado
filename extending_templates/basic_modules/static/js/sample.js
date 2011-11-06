@@ -1,1 +1,1 @@
-document.write("script loaded!");
+document.write("<p>javascript_files()</p>");

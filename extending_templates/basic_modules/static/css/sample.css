@@ -1,0 +1,22 @@
+.book {
+	width: 500px;
+	border: 1px solid #555;
+	padding: 0 15px 0 15px;
+	margin: 15px;
+}
+	.book img.book_image {
+		margin: 5px 15px 5px 0;
+		float: left;
+	}
+	
+	.book .book_details {
+		margin: 5px 10px 5px 0;
+	}
+	
+	.book .book_title {
+		color: #777;
+	}
+	
+/*h4 {
+	margin: 5px 0 5px 0;
+}*/

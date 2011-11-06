@@ -17,6 +17,7 @@ class Application(tornado.web.Application):
 		]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "templates"),
+			static_path=os.path.join(os.path.dirname(__file__), "static"),
 			ui_modules={"Sample": SampleModule},
 			debug=True,
 			autoescape=None
@@ -29,26 +30,29 @@ class MainHandler(tornado.web.RequestHandler):
 		self.render(
 			"index.html",
 			header_text = "Header goes here",
-			footer_text = "Footer goes here"
+			footer_text = "Footer goes here",
 			samples=[
 				{
 					"title":"Item 1",
+					"description":"Description for item 1"
 				},
 				{
 					"title":"Item 2",
+					"description":"Description for item 2"
 				},
 				{
 					"title":"Item 3",
+					"description":"Description for item 3"
 				}
 			]	
 		)
 
 
 class SampleModule(tornado.web.UIModule):
-	def render(self, book):
+	def render(self, sample):
 		return self.render_string(
 			"modules/sample.html", 
-			sample=sample,
+			sample=sample
 		)
 
 	def html_body(self):
@@ -58,7 +62,7 @@ class SampleModule(tornado.web.UIModule):
 		return "document.write(\"hi again!\")"
 	
 	def embedded_css(self):
-		return ".addition {border: 1px solid #F5F5F5}"
+		return ".addition {color: #A1CAF1}"
 		
 	def css_files(self):
 		return "/static/css/sample.css"

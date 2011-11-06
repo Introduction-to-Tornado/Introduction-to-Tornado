@@ -5,3 +5,37 @@ body {
 .small {
 	font-size: .7em;
 }
+
+
+/* discussion section */
+
+#discussion {
+	width: 700px;
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	color: #111;
+}
+
+#discussion h3 {
+	text-decoration: underline;
+}
+
+#discussion .comment {
+	width: 500px;
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	border: 1px solid #555;
+	background-color: #FAFAFA;
+}
+
+	#discussion .comment .comment_user {
+		text-decoration: underline;
+	}
+
+		#discussion .comment .comment_user .bold {
+			font-weight: bold;
+		}
+
+	#discussion .comment .comment_text {
+		font-style: italic;
+	}

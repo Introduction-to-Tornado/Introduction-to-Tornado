@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block header %}
+	<h1>{{ header_text }}</h1>
+{% end %}
+
+{% block body %}
+	<div id="discussion">
+		<h3>Comments</h3>
+		{% for comment in comments %}
+		<div class="comment">
+		  	<p class="comment_user"><span class="bold">{{ comment["user"] }}</span> says:</p>
+		  	<p class="comment_text">{{ comment["text"] }}</p>
+		</div>
+		{% end %}
+	</div>
+{% end %}
+

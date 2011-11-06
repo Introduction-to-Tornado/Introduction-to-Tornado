@@ -83,16 +83,7 @@ class BookModule(tornado.web.UIModule):
 			"modules/book.html", 
 			book=book,
 		)
-
-	# def html_body(self):
-	# 	return "<script>document.write(\"Hello!\")</script>"
-	# 
-	# def embedded_javascript(self):
-	# 	return "document.write(\"hi again!\")"
 	
-	def embedded_css(self):
-		return ".book {background-color:#F5F5F5}"
-		
 	def css_files(self):
 		return "/static/css/recommended.css"
 	

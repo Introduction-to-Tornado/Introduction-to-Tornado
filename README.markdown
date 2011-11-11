@@ -9,7 +9,7 @@ Tornado is a scalable, non-blocking web server and web application framework wri
 
 ## Sample code for the book
 
-The code for the examples in the book is grouped by chapter, with complete application examples that you can run on your own.  These shouldn't require anything beyond the basic install of Tornado and Python 2.6+, except for the MongoDB examples (which obviously require MongoDB, as well as pymongo).
+These are the complete code examples for the chapters in the [forthcoming O'Reilly book](http://shop.oreilly.com/product/0636920021292.do), with complete application examples that you can run on your own.  These shouldn't require anything beyond the basic install of Tornado and Python 2.6+, except for the MongoDB examples (which obviously require MongoDB, as well as pymongo).
 
 ## Contact
 

@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+{% autoescape None %}
+
+{% block body %}
+<form method="POST">
+	ISBN <input type="text" name="isbn"
+		value="{{ book.get('isbn', '') }}"><br>
+	Title <input type="text" name="title"
+		value="{{ book.get('title', '') }}"><br>
+	Subtitle <input type="text" name="subtitle"
+		value="{{ book.get('subtitle', '') }}"><br>
+	Image <input type="text" name="image"
+		value="{{ book.get('image', '') }}"><br>
+	Author <input type="text" name="author"
+		value="{{ book.get('author', '') }}"><br>
+	Date released <input type="text" name="date_released"
+		value="{{ book.get('date_released', '') }}"><br>
+	Description<br>
+	<textarea name="description" rows="5"
+		cols="40">{% raw book.get('description', '')%}</textarea><br>
+	<input type="submit" value="Save">
+</form>
+{% end %}

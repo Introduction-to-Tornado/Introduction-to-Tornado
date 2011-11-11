@@ -1,0 +1,25 @@
+<html>	 
+<head>
+	<title>{{ page_title }}</title>
+	<link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
+</head>
+<body>
+	<div id="container">
+		<header>
+			{% block header %}<h1>Burt's Books</h1>{% end %}
+		</header>
+		<div id="main">
+			<div id="content">
+				{% block body %}{% end %}
+			</div>
+		</div>
+		<footer>
+			{% block footer %}
+				<p>For more information about our selection, hours or events, please email us at <a href=\"mailto:contact@burtsbooks.com\">contact@burtsbooks.com</a>.</p> 
+				<p class="small">Follow us on Facebook at {% raw linkify("https://facebook.com/burtsbooks", extra_params='ref=website') %}.</p>
+			{% end %}
+		</footer>
+	</div>
+	<script src="{{ static_url("js/script.js") }}"></script>
+	</body>
+</html>

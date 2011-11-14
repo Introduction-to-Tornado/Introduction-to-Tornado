@@ -57,6 +57,7 @@ class BookEditHandler(tornado.web.RequestHandler):
 		book_fields = ['isbn', 'title', 'subtitle', 'image', 'author',
 			'date_released', 'description']
 		coll = self.application.db.books
+		book = dict()
 		if isbn:
 			book = coll.find_one({"isbn": isbn})
 		for key in book_fields:

@@ -5,7 +5,7 @@ import tornado.options
 from uuid import uuid4
 
 class ShoppingCart(object):
-	inventoryCount = 10
+	totalInventory = 10
 	callbacks = []
 	carts = {}
 	
@@ -27,14 +27,19 @@ class ShoppingCart(object):
 		self.notifyCallbacks()
 	
 	def notifyCallbacks(self):
-		for c in self.callbacks:
-			c(self.inventoryCount - len(self.carts))
-		self.callbacks = []
+		self.callbacks[:] = [c for c in self.callbacks if self.callbackHelper(c)]
+	
+	def callbackHelper(self, callback):
+		callback(self.getInventoryCount())
+		return False
+	
+	def getInventoryCount(self):
+		return self.totalInventory - len(self.carts)
 
 class DetailHandler(tornado.web.RequestHandler):
 	def get(self):
 		session = uuid4()
-		count = self.application.shoppingCart.inventoryCount
+		count = self.application.shoppingCart.getInventoryCount()
 		self.render("index.html", session=session, count=count)
 
 class CartHandler(tornado.web.RequestHandler):

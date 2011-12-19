@@ -6,8 +6,8 @@ import tornado.ioloop
 class TwitterHandler(tornado.web.RequestHandler, tornado.auth.TwitterMixin):
 	@tornado.web.asynchronous
 	def get(self):
-		oAuthToken = self.get_secure_cookie('oauth_token')
-		oAuthSecret = self.get_secure_cookie('oauth_secret')
+		oAuthToken = self.get_secure_cookie('access_key')
+		oAuthSecret = self.get_secure_cookie('access_secret')
 		userID = self.get_secure_cookie('user_id')
 		
 		if self.get_argument('oauth_token', None):
@@ -34,8 +34,8 @@ class TwitterHandler(tornado.web.RequestHandler, tornado.auth.TwitterMixin):
 			raise tornado.web.HTTPError(500, 'Twitter authentication failed')
 		
 		self.set_secure_cookie('user_id', str(user['id']))
-		self.set_secure_cookie('oauth_token', user['access_token']['key'])
-		self.set_secure_cookie('oauth_secret', user['access_token']['secret'])
+		self.set_secure_cookie('access_key', user['access_token']['key'])
+		self.set_secure_cookie('access_secret', user['access_token']['secret'])
 		
 		self.redirect('/')
 	

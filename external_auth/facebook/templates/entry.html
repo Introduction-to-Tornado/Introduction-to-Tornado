@@ -1,0 +1,17 @@
+{% if item['type'] == 'status' %}
+<div>
+	<p>
+		<strong>{{ item['from']['name'] }}</strong>
+		<em style="color:#999">on {{ format(item['created_time']) }}</em><br />
+		{{ item['message'] if 'message' in item else item['story'] }}
+	</p>
+</div>
+{% elif item['type'] == 'link' %}
+<div>
+	<p>
+		<strong>{{ item['from']['name'] }}</strong>
+		<em style="color:#999">on {{ format(item['created_time']) }}</em><br />
+		<a href="{{ item['link'] }}">{{ item['name'] if 'name' in item else item['story'] }}</a>
+	</p>
+</div>
+{% end %}

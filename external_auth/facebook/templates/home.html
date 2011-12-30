@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>{{ name }} on Facebook</title>
+	</head>
+	
+	<body>
+		<div>
+			<a href="/auth/logout">Sign out</a>
+			<h1>{{ name }}</h1>
+		</div>
+		<div>
+			<form action="/facebook/" method="POST">
+				<textarea rows="3" cols="50" name="message"></textarea>
+				<input type="submit" value="Update Status" />
+			</form>
+		</div>
+		<hr />
+		{% for item in feed %}
+			{% module FeedListItem(item) %}
+		{% end %}
+	</body>
+</html>

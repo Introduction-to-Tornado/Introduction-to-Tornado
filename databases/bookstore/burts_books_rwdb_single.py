@@ -18,8 +18,8 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/recommended/", RecommendedHandler),
-			(r"/books/([0-9\-]+)", BookHandler),
-			(r"/edit/([0-9\-]+)", BookEditHandler),
+			(r"/books/([0-9Xx\-]+)", BookHandler),
+			(r"/edit/([0-9Xx\-]+)", BookEditHandler),
 			(r"/add", BookEditHandler)
 		]
 		settings = dict(

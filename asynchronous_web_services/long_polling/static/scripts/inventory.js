@@ -5,7 +5,7 @@ $(document).ready(function() {
 	
 	$('#add-button').click(function(event) {
 		jQuery.ajax({
-			url: '//localhost:8000/cart',
+			url: '/cart',
 			type: 'POST',
 			data: {
 				session: document.session,
@@ -25,7 +25,7 @@ $(document).ready(function() {
 	
 	$('#remove-button').click(function(event) {
 		jQuery.ajax({
-			url: '//localhost:8000/cart',
+			url: '/cart',
 			type: 'POST',
 			data: {
 				session: document.session,
@@ -45,7 +45,7 @@ $(document).ready(function() {
 });
 
 function requestInventory() {
-	jQuery.getJSON('//localhost:8000/cart/status', {session: document.session},
+	jQuery.getJSON('/cart/status', {session: document.session},
 		function(data, status, xhr) {
 			$('#count').html(data['inventoryCount']);
 			setTimeout(requestInventory, 0);

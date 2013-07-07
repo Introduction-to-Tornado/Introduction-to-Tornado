@@ -16,7 +16,7 @@ class WrapHandler(tornado.web.RequestHandler):
 	def post(self):
 		text = self.get_argument('text')
 		width = self.get_argument('width', 40)
-		self.write(textwrap.fill(text, width))
+		self.write(textwrap.fill(text, int(width)))
 
 if __name__ == "__main__":
 	tornado.options.parse_command_line()

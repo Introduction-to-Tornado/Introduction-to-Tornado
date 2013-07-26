@@ -3,10 +3,10 @@
 import time
 import oauth2
 
-CONSUMER_KEY = 'qHOnEtah37wSbeRru5ymwg'
-CONSUMER_SECRET = 'oYhFzxG20wUykkFsc9ZJBukMuDCQNEzQnQbgAph6M'
-ACCESS_KEY = '525295116-VqgFKOCVh3xAuNhFPvF4BTMEQjEdgo35AhcbdN6X'
-ACCESS_SECRET = 'aLa6HhoxOxocn55D94iB1GWNAroTO6VOuRIskOy4'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+ACCESS_KEY = ''
+ACCESS_SECRET = ''
 
 
 def oauth(url):

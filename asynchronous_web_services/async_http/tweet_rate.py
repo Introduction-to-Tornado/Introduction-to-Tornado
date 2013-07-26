@@ -19,7 +19,7 @@ class IndexHandler(tornado.web.RequestHandler):
 		query = self.get_argument('q')
 		client = tornado.httpclient.HTTPClient()
 		url = "https://api.twitter.com/1.1/search/tweets.json?" + \
-				urllib.urlencode({"q": query, "result_type": "recent", "rpp": 100})
+				urllib.urlencode({"q": query, "result_type": "recent", "count": 100})
 		response = client.fetch(url, headers={'Authorization': oauth(url)})
 		body = json.loads(response.body)
 		result_count = len(body['statuses'])

@@ -10,6 +10,8 @@ import json
 import datetime
 import time
 
+from oauth import oauth
+
 from tornado.options import define, options
 define("port", default=8000, help="run on the given port", type=int)
 
@@ -19,15 +21,15 @@ class IndexHandler(tornado.web.RequestHandler):
 	def get(self):
 		query = self.get_argument('q')
 		client = tornado.httpclient.AsyncHTTPClient()
-		response = yield tornado.gen.Task(client.fetch,
-				"http://search.twitter.com/search.json?" + \
-				urllib.urlencode({"q": query, "result_type": "recent", "rpp": 100}))
+		url = "https://api.twitter.com/1.1/search/tweets.json?" + \
+				urllib.urlencode({"q": query, "result_type": "recent", "count": 100})
+		response = yield tornado.gen.Task(client.fetch, url, headers={'Authorization': oauth(url)})
 		body = json.loads(response.body)
-		result_count = len(body['results'])
+		result_count = len(body['statuses'])
 		now = datetime.datetime.utcnow()
-		raw_oldest_tweet_at = body['results'][-1]['created_at']
+		raw_oldest_tweet_at = body['statuses'][-1]['created_at']
 		oldest_tweet_at = datetime.datetime.strptime(raw_oldest_tweet_at,
-				"%a, %d %b %Y %H:%M:%S +0000")
+				"%a %b %d %H:%M:%S +0000 %Y")
 		seconds_diff = time.mktime(now.timetuple()) - \
 				time.mktime(oldest_tweet_at.timetuple())
 		tweets_per_second = float(result_count) / seconds_diff

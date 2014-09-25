@@ -18,7 +18,7 @@ class IndexHandler(tornado.web.RequestHandler):
 		query = self.get_argument('q')
 		client = tornado.httpclient.AsyncHTTPClient()
 		client.fetch("http://search.twitter.com/search.json?" + \
-				urllib.urlencode({"q": query, "result_type": "recent", "rpp": 100}),
+				urllib.urlencode({"q": query.encode('utf8'), "result_type": "recent", "rpp": 100}),
 				callback=self.on_response)
 
 	def on_response(self, response):

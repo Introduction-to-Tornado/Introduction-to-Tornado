@@ -58,10 +58,10 @@ class BookModule(tornado.web.UIModule):
 		)
 	
 	def css_files(self):
-		return "/static/css/recommended.css"
+		return "css/recommended.css"
 	
 	def javascript_files(self):
-		return "/static/js/recommended.js"
+		return "js/recommended.js"
 
 
 def main():

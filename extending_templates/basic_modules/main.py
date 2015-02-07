@@ -63,10 +63,10 @@ class SampleModule(tornado.web.UIModule):
 		return ".addition {color: #A1CAF1}"
 		
 	def css_files(self):
-		return "/static/css/sample.css"
+		return "css/sample.css"
 	
 	def javascript_files(self):
-		return "/static/js/sample.js"
+		return "js/sample.js"
 
 def main():
 	tornado.options.parse_command_line()

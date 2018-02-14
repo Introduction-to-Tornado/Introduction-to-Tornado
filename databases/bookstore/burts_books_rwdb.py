@@ -27,7 +27,7 @@ class Application(tornado.web.Application):
 			ui_modules={"Book": BookModule},
 			debug=True,
 			)
-		conn = pymongo.Connection("localhost", 27017)
+		conn = pymongo.MongoClient("localhost", 27017)
 		self.db = conn["bookstore"]
 		tornado.web.Application.__init__(self, handlers, **settings)
 

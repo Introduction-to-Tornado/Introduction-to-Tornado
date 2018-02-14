@@ -1,47 +1,82 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
 import tornado.httpclient
 
-import urllib
+import base64
+import requests
+import urllib.parse
 import json
 import datetime
 import time
 
 from tornado.options import define, options
-define("port", default=8000, help="run on the given port", type=int)
+define('port', default=8000, help='run on the given port', type=int)
+
+# twitter part
+
+client_key = 'NqHKwxVhm7Fk4257bzgAidOsN'
+client_secret = 'dlOeX6TtGfxqhz46rNRT6kfaPoQEN2qnkknSSodhxPIICnMuMR'
+key_secret = '{}:{}'.format(client_key, client_secret).encode('ascii')
+b64_encoded_key = base64.b64encode(key_secret)
+b64_encoded_key = b64_encoded_key.decode('ascii')
+base_url = 'https://api.twitter.com/'
+auth_url = '{}oauth2/token'.format(base_url)
+auth_headers = {'Authorization': 'Basic {}'.format(b64_encoded_key),
+                'Content-Type':
+                'application/x-www-form-urlencoded;charset=UTF-8'}
+auth_data = {'grant_type': 'client_credentials'}
+auth_resp = requests.post(auth_url, headers=auth_headers,
+                          data=auth_data)
+access_token = auth_resp.json()['access_token']
+search_headers = {'Authorization': 'Bearer {}'.format(access_token)}
+search_url = '{}1.1/search/tweets.json?'.format(base_url)
+
 
 class IndexHandler(tornado.web.RequestHandler):
-	@tornado.web.asynchronous
-	def get(self):
-		query = self.get_argument('q')
-		client = tornado.httpclient.AsyncHTTPClient()
-		client.fetch("http://search.twitter.com/search.json?" + \
-				urllib.urlencode({"q": query.encode('utf8'), "result_type": "recent", "rpp": 100}),
-				callback=self.on_response)
 
-	def on_response(self, response):
-		body = json.loads(response.body)
-		result_count = len(body['results'])
-		now = datetime.datetime.utcnow()
-		raw_oldest_tweet_at = body['results'][-1]['created_at']
-		oldest_tweet_at = datetime.datetime.strptime(raw_oldest_tweet_at,
-				"%a, %d %b %Y %H:%M:%S +0000")
-		seconds_diff = time.mktime(now.timetuple()) - \
-				time.mktime(oldest_tweet_at.timetuple())
-		tweets_per_second = float(result_count) / seconds_diff
-		self.write("""
-<div style="text-align: center">
-	<div style="font-size: 72px">%s</div>
-	<div style="font-size: 144px">%.02f</div>
-	<div style="font-size: 24px">tweets per second</div>
-</div>""" % (self.get_argument('q'), tweets_per_second))
-		self.finish()
+    @tornado.web.asynchronous
+    def get(self):
+        query = self.get_argument('q')
+        search_params = {'q': query, 'result_type': 'recent',
+                         'count': 100}
 
-if __name__ == "__main__":
-	tornado.options.parse_command_line()
-	app = tornado.web.Application(handlers=[(r"/", IndexHandler)])
-	http_server = tornado.httpserver.HTTPServer(app)
-	http_server.listen(options.port)
-	tornado.ioloop.IOLoop.instance().start()
+        client = tornado.httpclient.AsyncHTTPClient()
+        response = client.fetch(search_url +
+                                urllib.parse.urlencode(search_params),
+                                headers=search_headers,
+                                callback=self.on_response)
+
+    def on_response(self, response):
+        body = json.loads(response.body)
+        result_count = len(body['statuses'])
+        now = datetime.datetime.utcnow()
+        raw_oldest_tweet_at = body['statuses'][-1]['created_at']
+        oldest_tweet_at = \
+            datetime.datetime.strptime(
+                raw_oldest_tweet_at,
+                '%a %b %d %H:%M:%S +0000 %Y'
+                )
+        seconds_diff = time.mktime(now.timetuple()) \
+            - time.mktime(oldest_tweet_at.timetuple())
+        tweets_per_second = float(result_count) / seconds_diff
+        self.write("""
+                <div style="text-align: center">
+                <div style="font-size: 72px">%s</div>
+                <div style="font-size: 144px">%.02f</div>
+                <div style="font-size: 24px">tweets per second</div>
+                </div>"""
+                   % (self.get_argument('q'), tweets_per_second))
+        self.finish()
+
+
+if __name__ == '__main__':
+    tornado.options.parse_command_line()
+    app = tornado.web.Application(handlers=[(r"/", IndexHandler)],
+                                  debug=True)
+    http_server = tornado.httpserver.HTTPServer(app)
+    http_server.listen(options.port)
+    tornado.ioloop.IOLoop.current().start()

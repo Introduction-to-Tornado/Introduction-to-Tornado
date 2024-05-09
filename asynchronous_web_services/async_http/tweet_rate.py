@@ -18,8 +18,8 @@ define('port', default=8000, help='run on the given port', type=int)
 
 # twitter part
 
-client_key = '<YOUR-KEY-HERE>'
-client_secret = '<YOUR-SECRET-HERE>'
+client_key = 'JkX9Hb2EwNsAqeQ7L7TrawslT'
+client_secret = 'JlCrckBeq4NQhHBSDwpwBCvbK7f2XlI6qxu2WO2QI9OFXkDYbH'
 key_secret = '{}:{}'.format(client_key, client_secret).encode('ascii')
 b64_encoded_key = base64.b64encode(key_secret)
 b64_encoded_key = b64_encoded_key.decode('ascii')

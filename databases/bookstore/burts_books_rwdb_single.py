@@ -53,7 +53,7 @@ class BookHandler(tornado.web.RequestHandler):
 					header_text=book['title'],
 					book=book)
 				return
-		self.set_header(404)
+		self.set_status(404)
 		return
 
 class BookEditHandler(tornado.web.RequestHandler):
